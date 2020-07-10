@@ -2,7 +2,6 @@ const passport = require('passport')
 require('../config/google-config')
 const express = require('express');
 const router = express.Router();
-const { forwardAuthenticated } = require('../config/auth');
 
 router.get('/google', passport.authenticate('google', {
         scope: [

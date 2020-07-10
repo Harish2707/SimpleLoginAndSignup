@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
 
@@ -46,7 +45,7 @@ router.post('/register', (req, res)=>{
     var verify = Math.floor((Math.random() * 10000000) + 1);
 
     var mailOption = {
-        from :'noreply@gmail.com', // sender email
+        from : process.env.SENDER_MAIL, // sender email
         to : `${req.body.email}`, // receiver email
         subject: "Account Verification",
         html: `<h4>Hello User Please Click on this link to Activate your account</h4>
@@ -116,7 +115,7 @@ router.post('/forget', (req, res) => {
     let email = req.body.email
     console.log(email)
     var mailOption = {
-        from :'noreply@gmail.com', // sender email
+        from : process.env.SENDER_MAIL, // sender email
         to : `${email}`, // receiver email
         subject: "Reset Password Link",
         html: `<h4>Hello User Please Click on this link to Reset your password</h4>

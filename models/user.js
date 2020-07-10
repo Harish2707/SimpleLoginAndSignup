@@ -1,5 +1,4 @@
 var mongoose = require('mongoose');
-const bcrypt = require('bcrypt');
 var Schema = mongoose.Schema;
 
 var UserSchema = new Schema({
@@ -10,5 +9,4 @@ var UserSchema = new Schema({
     active: { type: Boolean, default: false}
 });
     
- 
 module.exports = mongoose.model('User', UserSchema);

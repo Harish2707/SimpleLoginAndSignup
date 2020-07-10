@@ -3,7 +3,6 @@ const router = express.Router();
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
 const nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
 const dotenv = require('dotenv');
 dotenv.config();
 

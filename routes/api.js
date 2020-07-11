@@ -25,7 +25,7 @@ var transporter = nodemailer.createTransport({
 
 //Login Routes
 router.get('/login', forwardAuthenticated, (req, res) =>{
-    res.render('login')
+    res.render('login',{message: req.flash('error')})
 });
 
 router.post('/login', (req, res, next) => {
@@ -59,7 +59,7 @@ router.post('/register', (req, res)=>{
     user.verification = verify
     user.save((err)=>{
         if (err){
-            res.send('Email already exists');
+            res.render('register',{message: 'Email already exists'});
         }else{
             transporter.sendMail(mailOption, (err, info) => {
                 if(err){
@@ -89,7 +89,7 @@ router.get('/verification/',(req, res) => {
                     console.log(err);
                 }
                 else{
-                    res.send('<center><h1>Account Verification Successfull</h1><br><h3>Please <a href="/api/login/">Login<a></h3></center>');
+                    res.render('login',{ message: 'Account Verified Successfully'})
                 }
             })
         }else{
@@ -123,10 +123,10 @@ router.post('/forget', (req, res) => {
     }
     User.findOne({ email: email}, (err, result)=>{
         if(err){
-            res.send("Email is not registered")
+            res.render('forgetPassword',{message: "Email is not registered"})
         }else{
             if(result == null){
-                res.send("Email is not registered")
+                res.render('forgetPassword',{message: "Email is not registered"})
             }
             transporter.sendMail(mailOption, (err, info) => {
                 if(err){
@@ -153,13 +153,13 @@ router.post('/reset', (req, res) => {
     let password1 = req.body.password1;
     let password2 = req.body.password2;
     if (password1 != password2){
-        res.send("Passwords does not match")
+        res.render('resetPassword',{message: "Passwords does not match"})
     }else{
         User.updateOne({email:req.cookies.EmailInfo.email},{password: password1},(err, result) => {
             if(err){
                 console.log(err);
             }else{
-                res.send('<center><h1>Account Password is reseted Successfully</h1><br><h3>Please <a href="/api/login/">Login<a></h3></center>');
+                res.render('login', { message: 'Account Password is Reset Successfully'})
             }
         })
     }
@@ -168,7 +168,6 @@ router.post('/reset', (req, res) => {
 //Logout Route
 router.get('/logout', (req, res) => {
     req.logout();
-    req.flash('success_msg', 'You are logged out');
     res.redirect('/');
 });
 

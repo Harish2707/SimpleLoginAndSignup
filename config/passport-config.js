@@ -1,17 +1,17 @@
 const LocalStrategy = require('passport-local').Strategy
 
 function initialize(passport, User) {
-    const authenticateUser =  async (email, password, done) => {
+    const authenticateUser = (email, password, done) => {
         User.findOne({ email: email, active: true})
-            .then(async user => {
+            .then(user => {
                 if (!user) {
-                    return done(null, false, { message: "Email is not registerd or Your account is not active" })
+                    return done(null, false, { message: "Email is not Registered or Your account is not Verified" })
                 }
                 try {        
                     if (password == user.password) {
                         return done(null, user)
                     } else {
-                        return done(null, false, { message: 'Password incorrect' })
+                        return done(null, false, { message: 'Password Incorrect' })
                     }
                 } catch (e) {
                     return done(e)

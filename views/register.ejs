@@ -105,6 +105,11 @@
                         <div class="col-md-12 text-center">
                             <h1>Signup</h1>
                         </div>
+                        <% if(typeof message != 'undefined'){ %>
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            <%= message %>
+                            </div>
+                        <% } %>
                     </div>
                     <form action="/api/register" method="POST" name="register">
                         <div class="form-group">
@@ -136,11 +141,11 @@
         </div>
     </div>
     <script>
-        $("#signup").click(function () {
-            $("#first").fadeOut("fast", function () {
-                $("#second").fadeIn("fast");
-            });
-        });
+        // $("#signup").click(function () {
+        //     $("#first").fadeOut("fast", function () {
+        //         $("#second").fadeIn("fast");
+        //     });
+        // });
 
         $(function () {
 

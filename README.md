@@ -1,8 +1,13 @@
 # SimpleLoginAndSignup
 This is Node JS Application 
 
-This application is simple login and sign up system which uses passport authentication and email verifiaction to activate a account, 
-Application has option to reset password and to login through google account.
+This application is simple login and sign up system which is developed using Node JS, Bootstrap, Express JS, and MongoDB.
+
+# Features
+* Passport Authentication
+* Email Verification 
+* Google+ sign up
+* Reset Password
 
 # To run this Application 
 * First modify the credentials in .env file 
